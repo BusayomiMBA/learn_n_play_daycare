@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DayCare</title>
+</head>
+<body>
+    <h1>List of Children</h1>
+    <hr/>
+    {% for child  in children %}
+    <p>Image: {{ child.image }}</p>
+    <p>Name: {{ child.name }}</p>
+    <p>Age: {{ child.age }}</p>
+    <p>Gender: {{ child.gender }}</p>
+    <p>Address: {{ child.address }}</p>
+    <p>PCP: {{ child.pcp }}</p>
+    <p>BIO: {{ child.bio }}</p>
+    <hr/>
+    {% endfor %}
+</body>
+</html>

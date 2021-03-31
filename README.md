@@ -36,6 +36,7 @@ screen captures of your app
 * Python
 * Django
 * Pymongo
+* postgreql
 
 ###  Code Snippets
 * 
@@ -44,7 +45,7 @@ screen captures of your app
 
 #### TO CREATE MODEL:
 * child
-* Daily activiites
+* Daily-activiites
 
 
  
