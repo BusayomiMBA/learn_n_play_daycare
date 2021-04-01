@@ -1,0 +1,73 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DayCare</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  
+   <script defer src="{% static 'app.js' %}"></script> 
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+</head>
+<body>
+    <h1>Child Details</h1>
+     <div class="row">
+       <div class="col s6">
+        <div class="card">
+          <div class="card-content">
+            <span class="card-title">{{ child.name }}</span>
+            <p>Image: {{ child.image}}</p>
+            <p>Gender: {{ child.gender }}</p>
+            {% if child.age > 0 %}
+              <p>Age: {{ child.age }}</p>
+            {% else %}
+              <p>Age: Underage</p>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+      <div class="col s6">
+        <form method="post" action="{% url 'add_dailyActivities' child.id %}">
+            {% csrf_token %}
+            {{ daily_ActivityForm.as_p }}
+            <input type="submit" class="btn" value="Daily Activity">
+          </form>
+        <table class="striped">
+          <thead>
+            <tr><th>Date</th><th>Daily Activities</th></tr>
+          </thead>
+          <tbody>
+            {% for daily_Activity in child.daily_Activity_set.all %}
+              <tr>
+                <td>{{daily_Activity.date}}</td>
+                <td>{{daily_Activity.get_activity_display}}</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <a class="update btn" href="{% url 'children_update' child.id %}">UPDATE</a> |
+    <a class="delete btn" href="{% url 'children_delete' child.id %}">DELETE</a>
+   
+   <script>
+        var dateEl = document.getElementById('id_date');
+        M.Datepicker.init(dateEl, {
+          format: 'yyyy-mm-dd',
+          defaultDate: new Date(),
+          setDefaultDate: true,
+          autoClose: true
+        });
+  
+        // add additional JS to initialize select below
+        var selectEl = document.getElementById('id_activity');
+        M.FormSelect.init(selectEl);
+      </script>
+
+</body>
+</html>
