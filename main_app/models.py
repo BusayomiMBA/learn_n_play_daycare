@@ -1,4 +1,9 @@
 from django.db import models
+from django.urls import reverse
+from datetime import date
+# Create your models here.
+
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Child(models.Model):
@@ -10,6 +15,8 @@ class Child(models.Model):
     pcp = models.CharField(max_length=100)
     bio= models.CharField(max_length=250)
 
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    
     def __str__(self):
         return self.name
 
