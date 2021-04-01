@@ -49,7 +49,8 @@ def about(request):
 
 @login_required()
 def children_index(request):
-    children = Child.objects.all()
+    
+    children = Child.objects.filter(user= request.user)
     return render(request, 'children/index.html', { 'children' : children })
 
 @login_required()
