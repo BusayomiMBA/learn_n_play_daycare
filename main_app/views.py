@@ -48,17 +48,28 @@ def children_index(request):
     children = Child.objects.all()
     return render(request, 'children/index.html', { 'children' : children })
 
+# def children_show(request, child_id):
+#     # we get access to that child_id variable
+#     # query for the specific child clicked
+#     child = Child.objects.get(id=child_id)
+#     # lets make a Daily_ActivityForm
+#     daily_ActivityForm = Daily_ActivityForm()
+#     return render(request, 'children/show.html', { 
+#       'child': child,
+#      'daily_ActivityForm': daily_ActivityForm
+#     })
+
 def children_show(request, child_id):
     # we get access to that child_id variable
     # query for the specific child clicked
     child = Child.objects.get(id=child_id)
     # lets make a Daily_ActivityForm
     daily_ActivityForm = Daily_ActivityForm()
+    print(child.daily_activity_set.all)
     return render(request, 'children/show.html', { 
       'child': child,
      'daily_ActivityForm': daily_ActivityForm
     })
-
 
 def add_dailyActivities(request, pk):
   # this time we are passing the data from our request in that form

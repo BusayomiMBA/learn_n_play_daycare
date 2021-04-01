@@ -42,10 +42,10 @@
             <tr><th>Date</th><th>Daily Activities</th></tr>
           </thead>
           <tbody>
-            {% for daily_Activity in child.daily_Activity_set.all %}
+            {% for daily_activity in child.daily_activity_set.all %}
               <tr>
-                <td>{{daily_Activity.date}}</td>
-                <td>{{daily_Activity.get_activity_display}}</td>
+                <td>{{daily_activity.date}}</td>
+                <td>{{daily_activity.get_activity_display}}</td>
               </tr>
             {% endfor %}
           </tbody>
@@ -54,7 +54,7 @@
     </div>
     <a class="update btn" href="{% url 'children_update' child.id %}">UPDATE</a> |
     <a class="delete btn" href="{% url 'children_delete' child.id %}">DELETE</a>
-   
+
    <script>
         var dateEl = document.getElementById('id_date');
         M.Datepicker.init(dateEl, {
