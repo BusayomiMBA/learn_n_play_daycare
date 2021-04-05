@@ -1,13 +1,23 @@
 from django.db import models
 from django.urls import reverse
-from datetime import date
+# from datetime import date
 # Create your models here.
+
+from datetime import datetime
+now = datetime.now()
+current_time = now.strftime("%H:%M:%S")
+print("Current Time =", current_time)
+
 
 from django.contrib.auth.models import User
 
 # Create your models here.
 class Child(models.Model):
-    image = models.ImageField(default='default.jpg', upload_to='profile_pics')
+    # image = models.ImageField(default='default.jpg', upload_to='profile_pics')
+    # child_image = models.ImageField(null=True, blank=True)
+    # child_image = models.ImageField(default='static/logo.png', upload_to='child/', null=True, blank=True)
+    # child_image = models.ImageField(upload_to='child/', null=True, blank=True)
+    child_image = models.ImageField(upload_to='media/', null=True, blank=True)
     name = models.CharField(max_length=100)
     age = models.IntegerField()
     gender = models.CharField(max_length=250)
@@ -28,10 +38,9 @@ ACTIVITIES  = (
     ('L', 'Lunch'),
     ('D', 'Dinner')
 )
-
 class Daily_Activity(models.Model):
     date = models.DateField("select today's date")
-    # time = models.TimeField(auto_now=False, auto_now_add=False, **options)
+    time = models.CharField(max_length=9, default=current_time)
     activity= models.CharField(
         max_length=1,
         # possible choices are the MEALS

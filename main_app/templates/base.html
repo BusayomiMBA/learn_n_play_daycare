@@ -1,7 +1,7 @@
-{% load static %}
-
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,33 +10,38 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
-   <script defer src="{% static 'app.js' %}"></script> 
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script defer src="{% static 'app.js' %}"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </head>
+
 <body>
   <header class="navbar-fixed">
     <nav>
-      <div class="nav-wrapper">  
+      <div class="nav-wrapper">
         <ul>
-            <li class="left brand-logo ">&nbsp;&nbsp;Learn N Play DayCare</li> 
+          <li class="left brand-logo ">&nbsp;&nbsp;Learn N Play DayCare</li>
         </ul>
         <a href='#' class='right sidenav-trigger' data-target="mobile-demo"><i class="material-icons">menu</i></a>
         <ul class="right hide-on-med-and-down">
+          <li><a href="{% url 'index' %}">Home</a></li>
           <li><a href="{% url 'about' %}">About</a></li>
+          <li><a href="{% url 'contact' %}">Contact</a></li>
           {% if user.is_authenticated %}
-            <li><a href="{% url 'children_create' %}">Add a Child</a></li>
-            <li><a href="{% url 'children' %}">List Of Children</a></li>
-            <li><a href="{% url 'logout' %}">Log out</a></li>
+          <li><a href="{% url 'children_create' %}">Add a Child</a></li>
+          <li><a href="{% url 'children' %}">List Of Children</a></li>
+          <li><a href="{% url 'logout' %}">Log out</a></li>
           {% else %}
-            <li><a href="{% url 'login' %}">Log in</a></li>
-            <li><a href="{% url 'sign_up' %}">Sign Up</a></li>
-            {% endif %}
+          <li><a href="{% url 'login' %}">Log in</a></li>
+          <li><a href="{% url 'sign_up' %}">Sign Up</a></li>
+          {% endif %}
         </ul>
       </div>
     </nav>
-  </header>  
+  </header>
   <ul class="sidenav" id="mobile-demo">
+    <li><a href="{% url 'index' %}">Home</a></li> -->
     <li><a href="{% url 'about' %}">About</a></li>
+    <li><a href="{% url 'contact' %}">Contact</a></li>
     {% if user.is_authenticated %}
     <li><a href="{% url 'children_create' %}">Add a Child</a></li>
     <li><a href="{% url 'children' %}">List Of Children</a></li>
@@ -47,6 +52,7 @@
     {% endif %}
   </ul>
   <main class="container">
+
     {% block content %}
     {% endblock %}
   </main>
@@ -55,4 +61,5 @@
   </footer>
 
 </body>
+
 </html>

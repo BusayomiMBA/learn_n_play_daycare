@@ -1,8 +1,14 @@
 {% extends 'base.html' %}
+{% load static %}
 
   {% block content %}
 
-    <h1>About</h1>
-    <h1>This is a daycare</h1>
+    <h3>About</h3>
+    <p>Learn N Play DayCare is comitted to providing quality early childhood education at affordable rates. At Learn N Play DayCare , provide children of Houston, TX an opportunity to thrive. We cater to the developmental, physical, emotional, intellectual and social needs of the children in our care by providing a safe, healthy and warm learning environment for children ages 6 weeks-12 years old.</p>
+    
+    <img src="{% static 'media/children-image-p4.jpg' %}" >
 
-{% endblock %}
+    <p>All of our Early Childhood Educators are screened with an extensive application and interview process that includes reference checks with previous employers and all eligible applicants must clear a State and FBI background check. Our Early Childhood Educators are First Aid/CPR Certified and receive on-going training to meet Texas Child Care Licensing Minimum Standards requirements.</p>
+    <p>At no additional cost, we have a Family Advocate that is available to connect families to local community organizations that may be able to assist families with social and emotional needs.</p>
+    {% endblock %}
+

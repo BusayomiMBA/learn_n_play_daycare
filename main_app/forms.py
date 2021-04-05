@@ -6,10 +6,10 @@ class Daily_ActivityForm(forms.ModelForm):
     class Meta:
         # which model
         model = Daily_Activity
-        fields = ['date', 'activity']
+        fields = ['date', 'time', 'activity']
 
 # added a catform
 class ChildForm(forms.ModelForm):
     class Meta:
         model = Child
-        fields = ['image', 'name', 'age', 'gender', 'address', 'pcp', 'bio']
+        fields = ['child_image', 'name', 'age', 'gender', 'address', 'pcp', 'bio']

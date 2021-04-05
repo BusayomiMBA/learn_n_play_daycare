@@ -1,4 +1,5 @@
-{% load static %}
+{% extends 'base.html' %}
+<!-- {% load static %} -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,24 +8,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DayCare</title>
     <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
-</head>
-<body>
-    <h1>All of the Children</h1>
-    <hr/>
-    <!-- Add link to create a new cat -->
-    <a href="/children/create">Add a New Child!</a>
-    <hr />
-    {% for child in children %}
-      <a href="/children/{{child.id}}">
-        <p>Image: {{ child.image }}</p>
-        <p>Name: {{ child.name }}</p>
-        {% if child.age > 0 %}
-        <p>Age: {{ child.age }}</p>
-        {% else %}
-        <p>Age: Underage</p>
-        {% endif %}
-      </a>
-        <hr/>
-    {% endfor %}
-</body>
+</head> 
+{% block content %}
+<section>
+  <h1>List Of Children</h1>
+  <hr />
+  <!-- Add link to create a new cat -->
+  <a href="/children/create">Add a New Child!</a>
+  <hr />
+  {% for child in children %}
+  <a href="/children/{{child.id}}">
+    <img class="eachpic" src="{{ child.child_image.url }}">
+    <p>Name: {{ child.name }}</p>
+    {% if child.age > 0 %}
+    <p>Age: {{ child.age }}</p>
+    {% else %}
+    <p>Age: Underage</p>
+    {% endif %}
+  </a>
+  <hr />
+  {% endfor %}
+</section>
+{% endblock %}
 </html>

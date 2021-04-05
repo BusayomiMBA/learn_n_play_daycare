@@ -25,7 +25,7 @@ class ChildCreate(CreateView):
 
 class ChildUpdate(UpdateView):
   model = Child
-  fields = ['image', 'name', 'age', 'gender', 'address', 'pcp', 'bio']
+  fields = ['child_image', 'name', 'age', 'gender', 'address', 'pcp', 'bio']
 
   def form_valid(self, form):
     self.object = form.save(commit=False)
@@ -47,18 +47,22 @@ def about(request):
     return render(request, 'about.html')
 
 
+def contact(request):
+    return render(request, 'contact.html')
+
+
 @login_required()
 def children_index(request):
-    
-    children = Child.objects.filter(user= request.user)
-    return render(request, 'children/index.html', { 'children' : children })
+  children = Child.objects.all()
+  # children = Child.objects.filter(user= request.user)
+  return render(request, 'children/index.html', { 'children' : children })
 
 @login_required()
 def children_new(request):
   # create new instance of cat form filled with submitted values or nothing
   # if this is a request.GET get request this will be none.
   # if the form was posted and valid
-  child_form = ChildForm(request.POST or None)  
+  child_form = ChildForm(request.POST, request.FILES or None)  
   if request.POST and child_form.is_valid():
     new_child = child_form.save(commit=False)
     new_child.user = request.user
@@ -71,6 +75,60 @@ def children_new(request):
     return render(request, 'children/new.html', { 'child_form': child_form })
 
 
+# #refactor to custom update to use @login_required decorator
+# @login_required
+# def children_update(request, pk):
+#   child_form = ChildForm(request.POST, request.FILES or None)  
+#   print(child_form)
+#   if request.POST:
+#     print('its an update request')
+#     # get the original cat
+#     our_child = Child.objects.get(id=pk)
+#     # update the values
+#     our_child.image = child_form.get('child_image')
+#     # print('FILES', request.FILES.get('child_image'))
+#     our_child.name = child_form.get('name')
+#     our_child.age = child_form.get('age')
+#     our_child.gender = child_form.get('gender')
+#     our_child.address = child_form.get('address')
+#     our_child.pcp = child_form.get('pcp')
+#     our_child.bio = child_form.get('bio')
+#     our_child.save()
+#     return redirect('children')
+
+#   # this is for the GET request
+#   child = Child.objects.get(id=pk)
+#   childform = ChildForm(initial=model_to_dict(child)) 
+#   return render(request, 'Children/child_form.html', { 'form': childform })
+
+
+
+
+# #refactor to custom update to use @login_required decorator
+# @login_required
+# def children_update(request, pk):
+#   if request.POST:
+#     print('its an update request')
+#     # get the original cat
+#     our_child = Child.objects.get(id=pk)
+#     # update the values
+#     our_child.image = request.FILES['child_image']
+#     print('FILES', request.FILES['child_image'])
+#     our_child.name = request.POST.get('name')
+#     our_child.age = request.POST.get('age')
+#     our_child.gender = request.POST.get('gender')
+#     our_child.address = request.POST.get('address')
+#     our_child.pcp = request.POST.get('pcp')
+#     our_child.bio = request.POST.get('bio')
+#     our_child.save()
+#     return redirect('children')
+
+#   # this is for the GET request
+#   child = Child.objects.get(id=pk)
+#   childform = ChildForm(initial=model_to_dict(child)) 
+#   return render(request, 'Children/child_form.html', { 'form': childform })
+
+
 #refactor to custom update to use @login_required decorator
 @login_required
 def children_update(request, pk):
@@ -79,7 +137,8 @@ def children_update(request, pk):
     # get the original cat
     our_child = Child.objects.get(id=pk)
     # update the values
-    our_child.image = request.POST.get('image')
+    our_child.image = request.FILES.get('child_image')
+    print('FILES', request.FILES.get('child_image'))
     our_child.name = request.POST.get('name')
     our_child.age = request.POST.get('age')
     our_child.gender = request.POST.get('gender')
@@ -92,7 +151,7 @@ def children_update(request, pk):
   # this is for the GET request
   child = Child.objects.get(id=pk)
   childform = ChildForm(initial=model_to_dict(child)) 
-  return render(request, 'children/child_form.html', { 'form': childform })
+  return render(request, 'Children/child_form.html', { 'form': childform })
 
 
 @login_required()
