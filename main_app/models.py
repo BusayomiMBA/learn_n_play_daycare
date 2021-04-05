@@ -48,6 +48,7 @@ ACTIVITIES  = (
     ('N', 'Snacks'),
     ('A', 'ReadingAloud'),
     ('D', 'Dancing'),
+    ('Y', 'Rythms'),
 )
 class Daily_Activity(models.Model):
     date = models.DateField("select today's date")
