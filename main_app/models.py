@@ -34,9 +34,20 @@ class Child(models.Model):
 
 # tuples (value1, value2, value3) immutable pop() no changing of the values
 ACTIVITIES  = (
-    ('B', 'Breakfast'),
-    ('L', 'Lunch'),
-    ('D', 'Dinner')
+    ('W', 'Welcome'),
+    ('B', 'BreakFast'),
+    ('L', 'Library'),
+    ('T', 'Writing'),
+    ('M', 'Music'),
+    ('R', 'Reading'),
+    ('S', 'Spelling'),
+    ('F', 'Lunch'),
+    ('C', 'ComputerLab'),
+    ('G', 'Gym'),
+    ('M', 'Math'),
+    ('N', 'Snacks'),
+    ('A', 'ReadingAloud'),
+    ('D', 'Dancing'),
 )
 class Daily_Activity(models.Model):
     date = models.DateField("select today's date")
